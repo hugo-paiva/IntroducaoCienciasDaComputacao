@@ -1,7 +1,13 @@
 t = int(input())
-for c in range(2):
+for c in range(t):
     a, b = input().split()
     a, b = [int(a), int(b)]
-    for c in range(a, a + b +1):
+    soma = cont = 0
+    for c in range(a, a + b):
+      soma += c
       cont += 1
-      print(c, end=' ' if cont == b else end='')
+      if cont < b:
+        print(c, end=' ')
+      else:
+        print(c, end='\n')
+    print(soma)
