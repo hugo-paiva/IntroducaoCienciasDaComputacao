@@ -3,7 +3,7 @@ def mmc(maior, x, y):
         return maior
     else:
         return mmc(maior + 1, x, y)
-    
+
 
 def mdc(a, b):
     menor = a
@@ -24,7 +24,7 @@ while True:
         print(0)
         continue
 
-    #MDC para usado reduzir o numero de recursões na função mmc
+    #MDC usado para reduzir o numero de recursões na função mmc
     MDC = mdc(a, b)
 
     #Caso especial mmc com número primo (quando maior divisor comum(MDC) é igual a 1)
@@ -35,7 +35,7 @@ while True:
     maior_num = a
     if b > maior_num:
         maior_num = b
-    
+
     #Simplicando valores com MDC
     maior_num /= MDC
     a /= MDC
