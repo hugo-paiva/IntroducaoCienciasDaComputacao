@@ -1,10 +1,8 @@
 codigo, quant_KWh = input().split()
-codigo, quant_KWh = int(codigo), int(quant_KWh)
-somatorio_consumos = 0
-soma_media = 0
-cont_media = 0
+somatorio_consumos = soma_media = cont_media = 0
 
-while codigo != 0:
+while codigo != '0':
+    codigo, quant_KWh = int(codigo), int(quant_KWh)
     if codigo == 1: # Residencial
         if quant_KWh <= 200:
             preco_consumo = quant_KWh * 0.60
@@ -28,7 +26,6 @@ while codigo != 0:
     print(f'{preco_consumo:.2f}')
 
     codigo, quant_KWh = input().split()
-    codigo, quant_KWh = int(codigo), int(quant_KWh)
 
 print(somatorio_consumos, end=' ')
 if soma_media > 0:
