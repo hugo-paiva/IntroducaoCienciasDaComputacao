@@ -1,4 +1,4 @@
-frase = input()
+"""frase = input()
 passou_do_ponto = False
 
 for index, caractere in enumerate(frase):
@@ -11,4 +11,19 @@ for index, caractere in enumerate(frase):
         print(caractere.upper(), end='')
         passou_do_ponto = False
     else:
-        print(caractere, end='')
+        print(caractere, end='')"""
+
+import string
+
+frase = input()
+capitalizar = True
+frase_final = ''
+for letra in frase:
+    if capitalizar and letra in string.ascii_letters:
+        frase_final += letra.upper()
+        capitalizar = False
+    else:
+        frase_final += letra
+    if letra == '.':
+        capitalizar = True
+print(frase_final)
