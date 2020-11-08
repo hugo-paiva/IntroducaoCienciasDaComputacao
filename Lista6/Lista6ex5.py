@@ -1,19 +1,19 @@
 tamanho = int(input())
 
 matriz = []
-coluna = 0
-linha_local = 0
 for _ in range(tamanho):
-    linha = input().split()
-    matriz.append(linha)
-matriz_final = matriz[:]
-for num_coluna in range(tamanho):
-    for num_linha in range(tamanho -1, -1, -1):
-        if matriz[num_linha][num_coluna] == '.':
-                if matriz[linha][num_coluna] == 'o':
-                    matriz_final[linha][num_coluna] = '.'
-                    matriz_final[num_linha][num_coluna] = 'o'
-for linha in matriz_final:
+    matriz.append(input().split())
+for num_linha_base in range(tamanho -1, 0, -1):
+    for num_coluna_base in range(tamanho):
+        if matriz[num_linha_base][num_coluna_base] == '.': 
+            for elevacao_obj in range(num_linha_base -1, -1, -1):
+                if matriz[elevacao_obj][num_coluna_base] == 'x': # Testa se há obstáculo, caso haja quebra o loop e passa pra coluna seguinte
+                    break
+                if matriz[elevacao_obj][num_coluna_base] == 'o':
+                    matriz[num_linha_base][num_coluna_base] = 'o'
+                    matriz[elevacao_obj][num_coluna_base] = '.'
+                    break
+for linha in matriz:
     for item in linha:
         print(item, end=' ')
     print()
@@ -26,6 +26,6 @@ for linha in matriz_final:
         if simbol =='o':
             coluna = num_coluna
             linha_local = num_linha
-            if matriz_final[linha_local+1][coluna] == '.':
-                matriz_final[linha_local+1][coluna] = 'o'
-                matriz_final[linha_local][coluna] = '.' '''
+            if matriz[linha_local+1][coluna] == '.':
+                matriz[linha_local+1][coluna] = 'o'
+                matriz[linha_local][coluna] = '.' '''
