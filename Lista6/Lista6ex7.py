@@ -1,4 +1,6 @@
-'''count = 0
+# Não resolve a questão por não ser iterativo
+
+count = 0
 a = []
 b = []
 c = []
@@ -20,6 +22,4 @@ A = list(range(1, discos + 1))
 B = []
 C = []
 hanoi(discos, A, C, B, passos)
-print(len(a), len(b), len(c), sep=' ')'''
-
-
+print(len(a), len(b), len(c), sep=' ')

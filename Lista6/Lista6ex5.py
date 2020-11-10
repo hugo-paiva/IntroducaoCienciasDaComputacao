@@ -17,15 +17,3 @@ for linha in matriz:
     for item in linha:
         print(item, end=' ')
     print()
-
-
-
-
-'''for num_linha, linha in enumerate(matriz):
-    for num_coluna, simbol in enumerate(linha):
-        if simbol =='o':
-            coluna = num_coluna
-            linha_local = num_linha
-            if matriz[linha_local+1][coluna] == '.':
-                matriz[linha_local+1][coluna] = 'o'
-                matriz[linha_local][coluna] = '.' '''
