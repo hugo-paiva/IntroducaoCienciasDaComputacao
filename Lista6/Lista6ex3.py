@@ -5,7 +5,7 @@ ganhador = ''
 bolo_fatiado = list(range(quant_fatias))
 for _ in range(quant_fatias):
     cliente, pedido = input().split()
-    cliente, pedido = str(cliente), int(pedido)
+    pedido = int(pedido)
     if bolo_fatiado[pedido] == premiada:
         ganhador = cliente
     del bolo_fatiado[pedido]

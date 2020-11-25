@@ -14,6 +14,7 @@ def hanoi(n,source,target,spare, step_count):
             a = A[:]
             b = B[:]
             c = C[:]
+            return
         hanoi(n-1, spare, target, source, step_count)
 
 discos, passos = input().split()

@@ -13,11 +13,13 @@ for _ in range(5):
                 # é outra maneira válida de se escrever
                 lista_brinq_atual.insert(index + spaces_movidos + 1, brinquedo)
                 del lista_brinq_atual[index]
-                break
             else:
-                lista_brinq_atual.insert(index - spaces_movidos,brinquedo)
-                del lista_brinq_atual[index + 1]
-                break
+                if index - spaces_movidos == -1:
+                    lista_brinq_atual.insert(3, brinquedo)
+                    del lista_brinq_atual[0]
+                else:
+                    lista_brinq_atual.insert(index - spaces_movidos,brinquedo)
+                    del lista_brinq_atual[index + 1]
 for index, item in enumerate(lista_brinq_atual):
     if item != lista_brinq_original[index]:
         contador += 1
