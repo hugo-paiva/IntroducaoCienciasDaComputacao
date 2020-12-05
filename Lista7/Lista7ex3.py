@@ -2,8 +2,7 @@ num_trabalhos = int(input())
 trabalho = {}
 gaveta = []
 for _ in range(num_trabalhos):
-    temp = input().split()
-    trabalho['arquivo'], trabalho['tags'] = temp[0], temp[1:]
+    trabalho['arquivo'], *trabalho['tags'] = input().split()
     gaveta.append(trabalho.copy())
 busca = input().split()
 

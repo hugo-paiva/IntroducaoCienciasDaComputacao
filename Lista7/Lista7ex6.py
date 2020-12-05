@@ -1,15 +1,16 @@
 num_palavras = int(input())
-dicio = {}
-lista_palavras = []
+
+lista_gatilhos = {}
 for _ in range(num_palavras):
-    dicio['palavra'], dicio['comportamento'] = input().split()
-    lista_palavras.append(dicio.copy())
+    gatilho, comportamento = input().split()
+    lista_gatilhos[gatilho] = comportamento
+    
 frase = input().split()
 resultado = []
-for p in frase:
-    for gatilho in lista_palavras:
-        if p == gatilho['palavra']:
-            resultado.append(gatilho['comportamento'])
+for palavra in frase:
+    for gatilho, comportamento in lista_gatilhos.items():
+        if palavra == gatilho:
+            resultado.append(comportamento)
 
 if resultado != []:
     print(' '.join(resultado))
