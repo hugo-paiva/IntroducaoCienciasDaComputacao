@@ -1,67 +1,107 @@
-def titulo(frase):
-    print(f'{frase:-^72}')
+def header(frase):
+    print(linha())
+    print(f'{frase.center(72)}')
+    print(linha())
+    print('Criado por Hugo Paiva.'.rjust(72))
 
-def corrigir_sep_decimal(tupla):
-    for idx,num in enumerate(tupla):
-        if ',' in num:
-            tupla[idx] = num.replace(',','.')
-    return tupla
+
+def leiaInt(msg):
+    while True:
+        try:
+            valor = int(input(msg))
+        except KeyboardInterrupt:
+            print('\033[31mO usuário preferiu não informar os dados.\033[m')
+            continue
+        except:
+            print('\033[31mERRO! Por favor digite um número inteiro válido.\033[m')
+        else:
+            return valor
+
+
+def leiaFloat(msg):
+    while True:
+        try:
+            valor = float(input(msg).replace(',', '.'))
+        except KeyboardInterrupt:
+            print('\033[31mO usuário preferiu não informar os dados.\033[m')
+            continue
+        except:
+            print('\033[31mERRO! Por favor digite um número inteiro válido.\033[m')
+            return 0
+        else:
+            return valor
+
+
+def linha(tam=72):
+    return '-' * tam
+
+
+def menu(lista):
+    header('O que deseja fazer?')
+    cont = 1
+    for linha in lista:
+        print(f'[ {cont} ] {linha}')
+        cont += 1
+    return leiaInt('Digite um número válido: ')
 
 
 def juros_compostos_aportes():
-    titulo(' Calculadora de Juros Compostos com Aportes Mensais ')
+    header('Calculadora de Juros Compostos com Aportes Mensais')
 
-    print('Criado por Hugo Paiva.'.rjust(72))
-    '''prazo = int(input('Digite o número de meses que deseja manter o dinheiro investido: '))
-    aportes_mensais = (float(input('Digite o valor dos aportes mensais: R$')))
-    taxa_juros = float(input('Digite o valor do juros mensais usando ponto como separador decimal: '))'''
-    prazo, aportes_mensais, taxa_juros = corrigir_sep_decimal(input('''Informe separando com espaços:
-    Quantos anos deseja manter o dinheiro investido? Informe valor dos 
-    aportes e juros mensais: '''
-        ).split())
-    prazo, aportes_mensais, taxa_juros = int(prazo)*12, float(aportes_mensais), float(taxa_juros)
-
+    # Input de dados
+    prazo = leiaInt('Digite o número de anos que deseja manter o dinheiro investido: ') * 12
+    aportes_mensais = leiaFloat('Digite o valor dos aportes mensais: R$')
+    taxa_juros = leiaFloat('Digite o valor do juros mensais: ')
+     
+    # Calculos referentes aos juros compostos com aportes
     montante = (aportes_mensais * (((100 + taxa_juros)/100)**prazo - 1)/ (taxa_juros/100))
+    total_investido = aportes_mensais * prazo
 
-    titulo(' RESULTADOS ')
+    header('RESULTADOS')
 
     print(f'O valor R${aportes_mensais} investido mensalmente durante um prazo de {prazo} meses\
          \na uma taxa de {taxa_juros} ao mês gera o montante de R${montante:.2f}')
-    print(f'Lucro em reais: R${montante-aportes_mensais*prazo:.2f}')
-    print(f'Lucro percentual: {(montante-aportes_mensais*prazo)/(aportes_mensais*prazo)*100:.2f}%')
+    lucro(total_investido, montante)
 
 
 def juros_compostos():
-    titulo(' Calculadora de Juros Compostos ')
+    header('Calculadora de Juros Compostos')
 
-    print('Criado por Hugo Paiva.'.rjust(72))
-    prazo, aportes_mensais, taxa_juros = corrigir_sep_decimal(input('''Informe separando com espaços:
-    Quantos anos deseja manter o dinheiro investido? Qual o valor depositado e juros mensais: ''').split())
-    prazo, aportes_mensais, taxa_juros = int(prazo)*12, float(aportes_mensais), float(taxa_juros)
+    # Input de dados
+    prazo = leiaInt('Digite o número de anos que deseja manter o dinheiro investido: ') * 12
+    aporte_unico = leiaFloat('Qual o valor depositado: R$')
+    taxa_juros = leiaFloat('Digite o valor do juros mensais: ')
 
-    montante = aportes_mensais * ((100 + taxa_juros)/100)**prazo
+    # Calculos referentes aos juros compostos
+    montante = aporte_unico * ((100 + taxa_juros)/100)**prazo
+    total_investido = aporte_unico
 
-    titulo(' RESULTADOS ')
+    header('RESULTADOS')
 
-    print(f'O valor inicial R${aportes_mensais} investido durante um prazo de {prazo} meses\
+    print(f'O valor inicial único de R${aporte_unico} investido durante um prazo de {prazo} meses\
          \na uma taxa de {taxa_juros} ao mês gera o montante de R${montante:.2f}')
-    print(f'Lucro em reais: R${montante-aportes_mensais:=>20.2f}')
-    print(f'Lucro percentual: {(montante-aportes_mensais)/(montante)*100:=>20.2f}%')
+    
+    lucro(total_investido, montante)
 
 
-opcao = 0
+def lucro(total_investido, montante):
+    print(f'\nTotal investido: R${total_investido:.>25.2f}')
+    print(f'Lucro em reais: R${montante-total_investido:.>26.2f}')
+    print(f'Lucro percentual total: {(montante-total_investido)/(total_investido)*100:.>20.2f} %')
+
+from time import sleep
+
 quer_continuar = 's'
-while 's' in quer_continuar:
-    print('Seja bem vindo!')
-    print('-'*72)
-
+while quer_continuar in 's':
+    
     while True:
-        opcao = int(input('''O que deseja fazer?
-    [ 1 ] Calcular rendimento de investimento com Aportes Mensais
-    [ 2 ] Calcular rendimento de um único aporte
-    Digite um número válido: '''))
-        if opcao in [1,2]:
+        opcao = menu(['Calcular rendimento de investimento com Aportes Mensais', 'Calcular rendimento de um único aporte'])
+        if opcao in [1, 2]:
             break
+        else:
+            print('\033[31mERRO! Digite uma opção válida!\033[m')
+            sleep(2)
+
     if opcao == 1: juros_compostos_aportes()
     if opcao == 2: juros_compostos()
 
