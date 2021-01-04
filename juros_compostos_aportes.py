@@ -9,6 +9,9 @@ def leiaInt(msg):
     while True:
         try:
             valor = int(input(msg))
+            if valor > 40:
+                print('ERRO! Por favor digite um número igual ou inferior a 40 anos! ')
+                continue
         except KeyboardInterrupt:
             print('\033[31mO usuário preferiu não informar os dados.\033[m')
             continue
@@ -75,20 +78,13 @@ def juros_compostos():
 
     # Calculos referentes aos juros compostos
     montante = aporte_unico * ((100 + taxa_juros)/100)**prazo
-    total_investido = aporte_unico
 
     header('RESULTADOS')
 
     print(f'O valor inicial único de R${aporte_unico} investido durante um prazo de {prazo} meses\
          \na uma taxa de {taxa_juros} ao mês gera o montante de R${montante:.2f}')
     
-    lucro(total_investido, montante)
-
-
-def lucro(total_investido, montante):
-    print(f'\nTotal investido: R${total_investido:.>25.2f}')
-    print(f'Lucro em reais: R${montante-total_investido:.>26.2f}')
-    print(f'Lucro percentual total: {(montante-total_investido)/(total_investido)*100:.>20.2f} %')
+    lucro(aporte_unico, montante)
 
 
 def juros_entrada_n_aportes():
@@ -96,7 +92,7 @@ def juros_entrada_n_aportes():
 
     # Input de dados
     prazo = leiaInt('Digite o número de anos que deseja manter o dinheiro investido: ') * 12
-    aporte_unico = leiaFloat('Qual o valor depositado: R$')
+    aporte_unico = leiaFloat('Qual o valor depositado de entrada: R$')
     aportes_mensais = leiaFloat('Digite o valor dos aportes mensais: R$')
     taxa_juros = leiaFloat('Digite o valor do juros mensais: ')
     
@@ -122,6 +118,12 @@ def juros_entrada_n_aportes():
     lucro(total_investido1 + total_investido2, montante1 + montante2)
         
 
+def lucro(total_investido, montante):
+    print(f'\nTotal investido: R${total_investido:.>25.2f}')
+    print(f'Lucro em reais: R${montante-total_investido:.>26.2f}')
+    print(f'Lucro percentual total: {(montante-total_investido)/(total_investido)*100:.>20.2f} %')
+
+
 from time import sleep
 
 quer_continuar = 's'
@@ -141,4 +143,4 @@ while quer_continuar in 's':
 
     quer_continuar = input('\nQuer fazer outro cálculo? [s/n]').strip().lower()
 
-print('Até mais! Volte sempre que precisar!')
+header('Até mais! Volte sempre que precisar!')
